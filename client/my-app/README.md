@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# my-app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React 18 starter screen in the p2p-file-sharing repository. The page is the Create React App default. Register, login, and encrypted upload and download are implemented in [`server/index.js`](../../server/index.js) and described in the [repository README](../../README.md).
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- `src/App.js` shows the React logo, `Edit src/App.js and save to reload.`, and a “Learn React” link to `https://reactjs.org`.
+- `src/App.test.js` looks for the text “learn react”.
+- `public/index.html` sets the document title to `React App`.
+- `public/manifest.json` sets `short_name` to `React App` and `name` to `Create React App Sample`.
+- `src/index.js` calls `reportWebVitals()` with no callback.
 
-### `npm start`
+## Tech stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+From `package.json`:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- react `^18.3.1` and react-dom `^18.3.1`
+- react-scripts `5.0.1`
+- `@testing-library/react` `^13.4.0`, `@testing-library/jest-dom` `^5.17.0`, `@testing-library/user-event` `^13.5.0`
+- web-vitals `^2.1.4`
 
-### `npm test`
+`package-lock.json` also includes webpack `5.92.0` and webpack-dev-server `4.15.2` as transitive dependencies of react-scripts. `webpack-cli` is absent from the lockfile.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup
 
-### `npm run build`
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Script | Command |
+| --- | --- |
+| `npm start` | `webpack serve --open` |
+| `npm run build` | `webpack --mode production` |
+| `npm test` | `react-scripts test` |
+| `npm run eject` | `react-scripts eject` |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`npm start` and `npm run build` reach the webpack binary, which prompts to install `webpack-cli` and exits when that install is declined. `webpack.config.js` sets `resolve.fallback` for `stream-http`, `crypto-browserify`, `path-browserify`, `stream-browserify`, `buffer`, `browserify-zlib`, `util`, `os-browserify`, `assert`, `process/browser`, `querystring-es3`, and `vm-browserify`, and it injects `process` and `Buffer` with `ProvidePlugin`. Those fallback packages are not listed in `package.json`. The config has no `entry`, `module.rules`, or `devServer`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`npm test` starts Jest in watch mode. Run the suite once with:
 
-### `npm run eject`
+```bash
+CI=true npm test -- --watchAll=false
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+`src/App.test.js` passes under that command. The test name is `renders learn react link`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The screen in `src/App.js` is the starter page above. To register a user, log in, or transfer a file, use the server documented in the [repository README](../../README.md). That server allows cross-origin calls from `http://localhost:3000`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## License
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This package is part of p2p-file-sharing, released under the MIT License. Copyright (c) 2026 Farras Inas. See [LICENSE](../../LICENSE).
